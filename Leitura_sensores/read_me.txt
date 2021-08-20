@@ -1,0 +1,1 @@
+pronto, bora ler sensores
