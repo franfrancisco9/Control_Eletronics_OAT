@@ -1,11 +1,11 @@
-##Utilização:
+## Utilização:
 
 - Abrir um IDE de ```Python``` ou a consola.
 - Abrir pasta ```Aircraft```.
 - Correr programa ```main.py```.
 - Ver comentários código para detalhes.
 
-#Update [24/08/2021]: 
+# Update [24/08/2021]: 
 
 - Código feito seguindo o link e conteúdos na pasta ```Teoria```
 - Para uma implementação individual dos capítulos ver o seguinte [link](https://github.com/eyler94/EE674LQR)
