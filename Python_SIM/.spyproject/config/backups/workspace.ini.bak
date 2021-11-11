@@ -1,0 +1,12 @@
+[workspace]
+restore_data_on_startup = True
+save_data_on_exit = True
+save_history = True
+save_non_project_files = False
+project_type = empty-project-type
+recent_files = ['Aircraft\\main.py', 'Aircraft\\autopilot.py', 'Aircraft\\mav_dynamics.py', 'Aircraft\\mav_viewer.py', 'Aircraft\\observer.py', 'Aircraft\\path_manager.py', 'Aircraft\\waypoint_viewer.py', 'parameters\\dubins_parameters.py']
+
+[main]
+version = 0.2.0
+recent_files = []
+

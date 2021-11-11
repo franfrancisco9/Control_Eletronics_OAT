@@ -1,0 +1,5 @@
+numpy
+pyopengl
+control
+pandas
+tk
