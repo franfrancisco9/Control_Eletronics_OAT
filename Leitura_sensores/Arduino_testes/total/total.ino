@@ -106,7 +106,7 @@ void loop() {
   Serial.print("     Accely:");
   Serial.print(IMU.getAccelY_mss(),6);
   Serial.print("     Accelz:");
-  Serial.print(IMU.getAccelZ_mss(),6);
+  Serial.println(IMU.getAccelZ_mss(),6);
   /*
   Serial.print("     Gyrox:");
   Serial.print(IMU.getGyroX_rads(),6);
@@ -121,7 +121,7 @@ void loop() {
   Serial.print("     Magz:");
   Serial.print(IMU.getMagZ_uT(),6);
   Serial.print("     Temperatura:");
-  Serial.print(IMU.getTemperature_C(),6);*/
+  Serial.println(IMU.getTemperature_C(),6);*/
   //--------------------------------------------------
   // Leitura da porta A5/Potenciometro
   // Grava dados do potenciometro em LER_POT.TXT

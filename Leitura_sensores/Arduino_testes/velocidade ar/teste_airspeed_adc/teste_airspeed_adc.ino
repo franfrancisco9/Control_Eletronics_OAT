@@ -4,7 +4,8 @@
 
 Adafruit_ADS1115 ads1115;
 
-
+int pushButton = 2;
+float pref=0;
 int16_t sensorValue;
 float VS = 5; //volts
 float air_density = 1.225; // Kg/m^3
@@ -15,18 +16,25 @@ void setup() {
   // declare the ledPin as an OUTPUT:
   Serial.begin(9600);
   ads1115.begin();
+  pinMode(pushButton, INPUT_PULLUP);
 }
 
 void loop() {
   // read the value from the sensor:
   float DP, volts, veloc;
-    
+  int buttonState = digitalRead(pushButton);
+  
   sensorValue = ads1115.readADC_SingleEnded(0);
   //o UNO e o NANO usam ambos uma escala de 0 a 5V no analog
   volts = sensorValue*VS/27040;
   
   DP = (volts-VS/2)*5/VS;
-  
+
+  if(!buttonState){
+    pref=DP;
+  }
+
+  DP = DP-pref;
   //DP = (sensorValue*5/1024-zeroVS)/(maxVS-zeroVS)*2; // kPa
 
   if(DP>0){

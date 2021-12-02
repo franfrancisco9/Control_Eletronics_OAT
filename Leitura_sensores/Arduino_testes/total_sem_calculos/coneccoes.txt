@@ -1,0 +1,31 @@
+Periférico - Arduino
+
+Leitor micro SD: https://lastminuteengineers.com/arduino-micro-sd-card-module-tutorial/
+CS - 4
+Sck - 13
+MISO - 12
+MOSI - 11
+Vcc - 5V
+Gnd - Gnd
+
+MPU9250:
+SDA - SDA (A4 on the NANO)
+SCL - SCL (A5 on the NANO)
+Vcc - 3.3V
+Gnd - Gnd
+
+ADS1115:
+SDA - SDA (A4 on the NANO)
+SCL - SCL (A5 on the NANO)
+Vcc - 5V
+Gnd - Gnd
+A0 - Analog (MPXV7002DP)
+
+MPXV7002DP:
+Vcc - 5V
+Gnd - Gnd
+Analog - A0 (ADS1115)
+
+Botão (esta em pullup):
+perna do meio - 2
+perna da ponto - Gnd
