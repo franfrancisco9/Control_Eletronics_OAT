@@ -32,7 +32,7 @@ classdef plots
             end
             title(titulo);
             hold on
-            if save = 1
+            if save == 1
                 filedir = split(mfilename('fullpath'), '\plots'); %get main folder
                 saveas(gca,strcat(char(filedir(1)),'\plots\',titulo),'png');
             end

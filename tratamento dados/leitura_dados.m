@@ -1,7 +1,15 @@
 classdef leitura_dados
     methods
         function [sensor_reading,sensor_ref, accelx, accely, accelz, gyrox, gyroy, gyroz, ...
-                magx, magy, magz, temperature]= GET_DATA(obj,file_name)
+                magx, magy, magz, temperature]= GET_DATA(obj,file_date, file_name)
+            
+            filedir = split(mfilename('fullpath'), '\leitura_dados'); %get file folder
+            cd (char(filedir(1))); %go to file folder
+
+            %go into the data file folder
+            data_file_dir = strcat('.\data\', file_date);
+            cd (data_file_dir);
+
             data_file_id = fopen(file_name,'r');
             DATAO = textscan(data_file_id, '%f%f%f%f%f%f%f%f%f%f%f%f', 'HeaderLines',1 , 'Delimiter', ' ','TreatAsEmpty','~');
             %DATAO = fscanf(data_dile_id,'%*s = %f');
