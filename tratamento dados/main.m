@@ -13,8 +13,8 @@ plot_functions = plots; %defining class plots
 inc_functions = inclinacao; %defining class inclinacao
 
 %user defined
-data_file_date = input("Please input the date of the file (Eg: '06_11_2021'): ");
-data_file_name = input("Please input the name of the file (Eg: '1ºvoo.txt'): ");
+data_file_date = input('Please input the date of the file (Eg: 06_11_2021): ', 's');
+data_file_name = input('Please input the name of the file (Eg: 1º voo.txt): ','s');
 view = input("Do you want to see the plots? 1 if yes and 0 if no: ");
 save = input("Do you want to save the plots? 1 if yes and 0 if no: ");
 %get data from the file
@@ -30,21 +30,21 @@ save = input("Do you want to save the plots? 1 if yes and 0 if no: ");
 tempo_arduino = (0:0.5:(0.5*(length(accelx)-1))).';
 
 %filter data
-accelx_f = filter_functions.KALMAN_F(accelx, accelx(1), 40, save, 10, 0, 0);
-accely_f = filter_functions.KALMAN_F(accely, accely(1), 40, save, 10, 0, 0);
-accelz_f = filter_functions.KALMAN_F(accelz, accelz(1), 40, save, 10, 0, 0);
-gyrox_f = filter_functions.KALMAN_F(gyrox, gyrox(1), 40, save, 10, 0, 0);
-gyroy_f = filter_functions.KALMAN_F(gyroy, gyroy(1), 40, save, 10, 0, 0);
-gyroz_f = filter_functions.KALMAN_F(gyroz, gyroz(1), 40, save, 10, 0, 0);
+accelx_f = filter_functions.KALMAN_F(accelx, accelx(1), 40, 1, 10, 0, 0);
+accely_f = filter_functions.KALMAN_F(accely, accely(1), 40, 1, 10, 0, 0);
+accelz_f = filter_functions.KALMAN_F(accelz, accelz(1), 40, 1, 10, 0, 0);
+gyrox_f = filter_functions.KALMAN_F(gyrox, gyrox(1), 40, 1, 10, 0, 0);
+gyroy_f = filter_functions.KALMAN_F(gyroy, gyroy(1), 40, 1, 10, 0, 0);
+gyroz_f = filter_functions.KALMAN_F(gyroz, gyroz(1), 40, 1, 10, 0, 0);
 
 
 %plot data raw and filtered
-plot_functions.IMPRIMIR(1, tempo_arduino, accelx, accelx_f,1, data_file_date, data_file_name, view);
-plot_functions.IMPRIMIR(2, tempo_arduino, accely, accely_f,1, data_file_date, data_file_name, view);
-plot_functions.IMPRIMIR(3, tempo_arduino, accelz, accelz_f,1, data_file_date, data_file_name, view);
-plot_functions.IMPRIMIR(4, tempo_arduino, gyrox, gyrox_f,1, data_file_date, data_file_name, view);
-plot_functions.IMPRIMIR(5, tempo_arduino, gyroy, gyroy_f,1, data_file_date, data_file_name, view);
-plot_functions.IMPRIMIR(6, tempo_arduino, gyroz, gyroz_f,1, data_file_date, data_file_name, view);
+plot_functions.IMPRIMIR(1, tempo_arduino, accelx, accelx_f,save, data_file_date, data_file_name, view);
+plot_functions.IMPRIMIR(2, tempo_arduino, accely, accely_f,save, data_file_date, data_file_name, view);
+plot_functions.IMPRIMIR(3, tempo_arduino, accelz, accelz_f,save, data_file_date, data_file_name, view);
+plot_functions.IMPRIMIR(4, tempo_arduino, gyrox, gyrox_f,save, data_file_date, data_file_name, view);
+plot_functions.IMPRIMIR(5, tempo_arduino, gyroy, gyroy_f,save, data_file_date, data_file_name, view);
+plot_functions.IMPRIMIR(6, tempo_arduino, gyroz, gyroz_f,save, data_file_date, data_file_name, view);
 
 
 %calcular inclinação
@@ -58,13 +58,13 @@ g = sqrt(accelx.^2+accely.^2+accelz.^2);
 inc_completa = inc_functions.INC_COMPLETA(g,inclinacao_accel, inclinacao_gyro, 9.71, 9.77);
 inc_completa_deg = inc_completa*180/pi;
 
-accel_bias = 0.1;
+accel_bias = 0.3;
 exp = 0.0001;
 inc_pond = inc_functions.INC_PONDERADA(g,inclinacao_accel, inclinacao_gyro,mean(g(1:4)), accel_bias, exp);
 inc_pond_deg = inc_pond*180/pi;
 
 
-plot_functions.IMPRIMIR_INC(2, tempo_arduino, inc_accel_deg, inc_gyro_deg, inc_completa_deg, save, 7, data_file_date, data_file_name, view)
+plot_functions.IMPRIMIR_INC(1, tempo_arduino, inc_accel_deg, inc_gyro_deg, inc_completa_deg, save, 7, data_file_date, data_file_name, view)
 
-plot_functions.IMPRIMIR_INC(2, tempo_arduino, inc_accel_deg, inc_gyro_deg, inc_pond_deg, save, 8, data_file_date, data_file_name, view)
+plot_functions.IMPRIMIR_INC(1, tempo_arduino, inc_accel_deg, inc_gyro_deg, inc_pond_deg, save, 8, data_file_date, data_file_name, view)
 

@@ -3,7 +3,7 @@ classdef leitura_dados
         function [sensor_reading,sensor_ref, accelx, accely, accelz, gyrox, gyroy, gyroz, ...
                 magx, magy, magz, temperature]= GET_DATA(obj,file_date, file_name)
             
-            filedir = split(mfilename('fullpath'), '\leitura_dados'); %get file folder
+            filedir = string(split(mfilename('fullpath'), '\leitura_dados')); %get file folder
 
             %go into the data file folder
             data_file_dir = strcat(filedir(1), '\data\', file_date);
