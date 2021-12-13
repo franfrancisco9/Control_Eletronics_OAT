@@ -1,9 +1,15 @@
 classdef plots
     methods
-        function IMPRIMIR(obj,indicador, tempo, dados, dados_f, save)
-            figure(indicador)
+        function IMPRIMIR(obj,indicador, tempo, dados, dados_f, save, file_date, file_name, view)
+            if view == 1
+                f = figure(indicador);
+                
+            else
+                 f = figure(indicador);
+                 f.Visible = 'off'; 
+            end
             scr_siz = get(0,'ScreenSize') ;
-            set(gcf, 'Position',  [1 scr_siz(4)/4 scr_siz(3) scr_siz(4)/2])
+            set(f, 'Position',  [1 scr_siz(4)/4 scr_siz(3) scr_siz(4)/2])
             
             
             
@@ -33,37 +39,54 @@ classdef plots
             title(titulo);
             hold on
             if save == 1
-                filedir = split(mfilename('fullpath'), '\plots'); %get main folder
-                saveas(gca,strcat(char(filedir(1)),'\plots\',titulo),'png');
+                filedir1 = split(mfilename('fullpath'), '\plots');
+                dir = strcat(char(filedir1(1)),"/results/", file_date, "_", split(file_name, '.txt'));
+                if ~exist(dir(1), 'dir')
+                    mkdir(dir(1));
+                end
+                cd (dir(1));
+                saveas(f,strcat(dir(1), "\", titulo),'png');
             end
         end
-        function IMPRIMIR_INC(obj,indicador, tempo, inc_accel, inc_gyro, inc_final, save, fig)
-            figure(fig)
+        function IMPRIMIR_INC(obj,indicador, tempo, inc_accel, inc_gyro, inc_final, save, fig,  file_date, file_name, view)
+            if view == 1
+                f = figure(fig);
+                
+            else
+                 f = figure(fig);
+                 f.Visible = 'off'; 
+            end
             scr_siz = get(0,'ScreenSize') ;
-            set(gcf, 'Position',  [1 scr_siz(4)/4 scr_siz(3) scr_siz(4)/2])
+            set(f, 'Position',  [1 scr_siz(4)/4 scr_siz(3) scr_siz(4)/2])
             
             plot(tempo, inc_final);
             hold on
             switch(indicador)
                case 1
+                  titulo = ('Inclinação_1');
                   plot(tempo, inc_accel);
                   legend('final','accel')
                   xlabel('time (s)')
                case 2
+                  titulo = ('Inclinação_2');
                   plot(tempo, inc_accel, tempo, inc_gyro);
                   legend('final','accel','gyro')
                   xlabel('time (s)')
             end
             
-            
-            titulo = ('Inclinação');
+          
             ylabel('Inclinação (graus)')
             
             title(titulo);
             hold on
             if save == 1
-                filedir = split(mfilename('fullpath'), '\plots'); %get main folder
-                saveas(gca,strcat(char(filedir(1)),'\plots\',titulo),'png');
+                filedir1 = split(mfilename('fullpath'), '\plots');
+                dir = strcat(char(filedir1(1)),"/results/", file_date, "_", split(file_name, '.txt'));
+                if ~exist(dir(1), 'dir')
+                    mkdir(dir(1));
+                end
+                cd (dir(1));
+                saveas(f,strcat(dir(1), "\", titulo),'png');
             end
         end
     end

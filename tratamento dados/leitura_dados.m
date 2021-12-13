@@ -4,13 +4,12 @@ classdef leitura_dados
                 magx, magy, magz, temperature]= GET_DATA(obj,file_date, file_name)
             
             filedir = split(mfilename('fullpath'), '\leitura_dados'); %get file folder
-            cd (char(filedir(1))); %go to file folder
 
             %go into the data file folder
-            data_file_dir = strcat('.\data\', file_date);
+            data_file_dir = strcat(filedir(1), '\data\', file_date);
             cd (data_file_dir);
-
-            data_file_id = fopen(file_name,'r');
+            file = strcat(filedir(1), '\data\', file_date, "\", file_name);
+            data_file_id = fopen(file,'r');
             DATAO = textscan(data_file_id, '%f%f%f%f%f%f%f%f%f%f%f%f', 'HeaderLines',1 , 'Delimiter', ' ','TreatAsEmpty','~');
             %DATAO = fscanf(data_dile_id,'%*s = %f');
             fclose(data_file_id);
